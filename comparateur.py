@@ -1,7 +1,7 @@
-import evaluateurs.evaluateur_breakdown as bd
-import evaluateurs.evaluateur_ibreakdown as ibd
-import evaluateurs.evaluateur_lime as elime
-import evaluateurs.evaluateur_shap as eshap
+import comparateurs_explicateurs.evaluateurs.evaluateur_breakdown as bd
+import comparateurs_explicateurs.evaluateurs.evaluateur_ibreakdown as ibd
+import comparateurs_explicateurs.evaluateurs.evaluateur_lime as elime
+import comparateurs_explicateurs.evaluateurs.evaluateur_shap as eshap
 import numpy as np
 
 
