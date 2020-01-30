@@ -9,7 +9,7 @@ Original file is located at
 
 import numpy as np
 import pandas as pd
-from sklearn import datasets, tree
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from pyBreakDown.explainer import Explainer
 from pyBreakDown.explanation import Explanation
@@ -48,7 +48,7 @@ def get_modele(modele, train_data, train_labels):
     # Modele
     
     if (modele == "Arbre"):
-        model = tree.DecisionTreeClassifier().fit(train_data,y=train_labels)
+        model = DecisionTreeClassifier().fit(train_data,y=train_labels)
     elif (modele == "Régression Logistique"):
         model = LogisticRegression().fit(train_data, train_labels)
     elif (modele == "KNN"):
