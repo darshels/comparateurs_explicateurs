@@ -35,7 +35,7 @@ def comparateur(data, y, feature_names, modele):
     print("lime :", mauvaises_pred_lime)
     print("shap :", mauvaises_pred_shap)
     
-    result.append(mauvaises_pred_bd)
+    #result.append(mauvaises_pred_bd)
     result.append(mauvaises_pred_ibd)
     result.append(mauvaises_pred_lime)
     result.append(mauvaises_pred_shap)
