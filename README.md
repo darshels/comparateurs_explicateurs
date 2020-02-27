@@ -32,3 +32,7 @@ Vous trouverez des exemples de son utilisation dans le dossier exemple.
 Prenons un exemple de résultat du comparateur
 
 ![](other/exemple_output.PNG)
+
+Les taux d'erreurs sont d'abord indiqués. Plus le score est faible meilleure est l'explicabilité de la librairie.
+Puis les temps d'exécutions de chaque évaluateur sont affichés.
+Le temps total est la somme de tous les temps d'exécutions des évaluateurs + le temps d'exécution du déroulement du code. 
