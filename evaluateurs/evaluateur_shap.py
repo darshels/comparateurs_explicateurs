@@ -8,9 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
-from tensorflow import keras 
-from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Dense
+from tensorflow import keras
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 #from __future__ import absolute_import, division, print_function, unicode_literals
@@ -18,21 +16,6 @@ import tensorflow as tf
 #import tensorflow_datasets as tfds
 import warnings
 warnings.simplefilter("ignore")
-
-
-#build NN model
-def create_model():
-	# create model
-  model = Sequential()
-  model.add(Dense(50, activation='relu'))
-  model.add(Dense(100, activation='relu'))
-  model.add(Dense(50, activation='relu'))
-  model.add(Dense(1))
- #model.compile(loss="categorical_crossentropy", optimizer='keras.optimizers.RMSprop()', metrics=["accuracy"])
-  model.compile(loss='mean_squared_error', optimizer='adam')
-  return model
-
-#----------------------------------------------------------------------------------------------------------------#
 
 def get_modele(modele, train_data, train_labels, test_data):
     # Modele et explicateur
@@ -46,14 +29,24 @@ def get_modele(modele, train_data, train_labels, test_data):
         model = RandomForestClassifier().fit(train_data, train_labels)
     elif (modele == "SVM"):
         model = SVC(probability=True).fit(train_data, train_labels)
+    elif (modele == "NN"):
+        model = keras.Sequential([
+            keras.layers.Flatten(input_shape=train_data[0].shape),
+            keras.layers.Dense(8, activation='relu'),
+            keras.layers.Dense(8, activation='relu'),
+            keras.layers.Dense(1, activation='sigmoid')
+        ])
+        model.compile(loss='binary_crossentropy', optimizer='adam',
+                  metrics=['accuracy'])
+        model.fit(train_data, train_labels, verbose=0)
     else: 
         return("Ce nom de modèle n'est pas pris en charge")
     
     return model
 
-def eval_shap(data, y, feature_names, nb_tw, modele, model, shap_values):
+def eval_shap(data, y, feature_names, nb_tw, modele, model, shap_values, ind):
     
-    train_data, test_data, train_labels, test_labels = train_test_split(data, y, test_size=0.3, random_state=1)
+    train_data, test_data, train_labels, test_labels = train_test_split(data, y, test_size=0.3, random_state=ind)
     
     nb_diff = 0 
     n_test = len(test_labels)
@@ -64,7 +57,10 @@ def eval_shap(data, y, feature_names, nb_tw, modele, model, shap_values):
       list_tuples.sort(key=lambda tup: tup[1], reverse=True)
       attributes =[x[0] for x in list_tuples]
       #On prédit la valeur de l'individu
-      pred_before = model.predict([data[i,:]])
+      if modele == 'NN':
+            pred_before = model.predict_classes(test_data[i].reshape(1,-1))[0,0]
+      else:
+            pred_before = model.predict([test_data[i,:]])
 
       #utw = untrustworthy
       #n : nombre de variables explicatives
@@ -76,9 +72,12 @@ def eval_shap(data, y, feature_names, nb_tw, modele, model, shap_values):
       data2 = pd.DataFrame(data2, columns=feature_names)
       data2 = np.array(data2.drop(columns=utw_names))
 
-      train_data2, test_data2, train_labels, test_labels = train_test_split(data2, y, test_size=0.3, random_state=1)
+      train_data2, test_data2, train_labels, test_labels = train_test_split(data2, y, test_size=0.3, random_state=ind)
       model2 = get_modele(modele, train_data2, train_labels, test_data2)
-      pred_after = model2.predict([data2[i,:]])
+      if modele == 'NN':
+            pred_after = model2.predict_classes(test_data2[i].reshape(1,-1))[0,0]
+      else:
+            pred_after = model2.predict([test_data2[i,:]])
 
 
       if ((pred_after-pred_before) != 0):
