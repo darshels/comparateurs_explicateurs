@@ -31,4 +31,4 @@ Vous trouverez des exemples de son utilisation dans le dossier exemple.
 
 Prenons un exemple de résultat du comparateur
 
-!tien(other/exemple_output.png)
+![](other/exemple_output.PNG)
