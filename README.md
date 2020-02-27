@@ -1,9 +1,10 @@
 # comparateurs_explicateurs
-Comparateurs des librairies d'explicabilité sur différents jeux de données.
-Les librairies présentes sont LIME, SHAP, iBreakDown, iBreakDown2 et iBreakDown3. Ces deux dernières sont des modifications que nous avons apportées, vous trouverez la documentation dans iBreakDown2 dans ce git. 
-iBreakDown3 se base sur iBreakDown2 et prend en compte les triplets de variables.
+Le but de ce projet est de comparer des librairies d'explicabilité sur différents jeux de données.
 
-Le comparateur ne marche uniquement que pour les classifications binaires. Il retourne les taux d'erreurs de chaque librairie pour un jeu de données et modèles prédictifs choisis, et écrit également ces scores dans un fichier avec les temps d'exécutions.
+Les librairies présentes sont LIME, SHAP, iBreakDown, iBreakDown2 et iBreakDown3. Ces deux dernières sont des modifications que nous avons apportées, vous trouverez la documentation dans iBreakDown2 dans ce git. 
+iBreakDown3 se base sur iBreakDown2 et prend en plus en compte les triplets de variables.
+
+Le comparateur que nous vous proposons ne marche uniquement que pour les classifications binaires. Il retourne les taux d'erreurs de chaque librairie pour un jeu de données et modèles prédictifs choisis, et écrit également ces scores dans un fichier avec les temps d'exécutions.
 
 # Utilisation
 Pour utiliser le comparateur, vous devez tout d'abord importer le fichier "comparateur.py" qui va faire appel aux différents évaluateurs.
