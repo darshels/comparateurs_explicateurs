@@ -1,5 +1,7 @@
 # comparateurs_explicateurs
 Comparateurs des librairies d'explicabilité sur différents jeux de données.
+Les librairies présentes sont LIME, SHAP, iBreakDown, iBreakDown2 et iBreakDown3. Ces deux dernières sont des modifications que nous avons apportées, vous trouverez la documentation dans iBreakDown2 dans ce git. 
+iBreakDown3 se base sur iBreakDown2 et prend en compte les triplets de variables.
 
 Le comparateur ne marche uniquement que pour les classifications binaires. Il retourne les taux d'erreurs de chaque librairie pour un jeu de données et modèles prédictifs choisis, et écrit également ces scores dans un fichier avec les temps d'exécutions.
 
@@ -24,3 +26,9 @@ Les variables correspondent à :
 Le comparateur retourne son résultat dans result qui est une liste.
 
 Vous trouverez des exemples de son utilisation dans le dossier exemple.
+
+# Interprétation
+
+Prenons un exemple de résultat du comparateur
+
+!tien(other/exemple_output.png)
